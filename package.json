@@ -4,12 +4,23 @@
   "description": "Simple teleprompter",
   "main": "app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "electron-builder": "^24.9.1",
     "electron": "^34.0.1"
+  },
+  "build": {
+    "appId": "com.simpletp.app",
+    "productName": "Simple Teleprompter",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg",
+      "icon": "build/icon.icns"
+    }
   }
 }
