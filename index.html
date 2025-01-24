@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Teleprompter</title>
     <style>
+        html, body {
+            font-family: monospace;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -45,8 +48,7 @@
 <body>
     <div id="teleprompter" contenteditable="true"></div>
     <div id="controls">
-        Shortcuts: ⌘+⌃+⇧+K (Toggle), ⌘+⌃+⇧+P (Play/Pause), ⌘+⌃+⇧+R (Reverse),
-        ⌘+⌃+⇧+↑ (Speed Up), ⌘+⌃+⇧+↓ (Speed Down)
+        Shortcuts: ⌘+⌃+⇧+K (Toggle), ⌘+⌃+⇧+M (Mirror text), ⌘+⌃+⇧+P (Play/Pause), ⌘+⌃+⇧+R (Reverse), ⌘+⌃+⇧+↑ (Speed Up), ⌘+⌃+⇧+↓ (Speed Down)
     </div>
     <script src="renderer.js"></script>
 </body>

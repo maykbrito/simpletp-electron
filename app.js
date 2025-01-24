@@ -37,6 +37,10 @@ app.on('ready', () => {
 	globalShortcut.register('Command+Control+Shift+Down', () => {
 		mainWindow.webContents.executeJavaScript('adjustSpeed(-0.2)');
 	});
+
+	globalShortcut.register('Command+Control+Shift+m', () => {
+		mainWindow.webContents.executeJavaScript('toggleMirror()');
+	});
 });
 
 app.on('window-all-closed', () => {

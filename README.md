@@ -33,6 +33,7 @@ pnpm start
 ### Keyboard Shortcuts
 
 - `⌘+⌃+⇧+K`: Toggle fullscreen
+- `⌘+⌃+⇧+M`: Mirror text
 - `⌘+⌃+⇧+P`: Play/Pause scrolling
 - `⌘+⌃+⇧+R`: Toggle reverse scrolling
 - `⌘+⌃+⇧+↑`: Increase scroll speed

@@ -1,6 +1,7 @@
 let isPlaying = false;
 let scrollSpeed = 1;
 let isReversed = false;
+let isMirrored = false;
 let scrollInterval;
 
 const teleprompter = document.getElementById('teleprompter');
@@ -43,6 +44,11 @@ function adjustSpeed(delta) {
         stopScroll();
         startScroll();
     }
+}
+
+function toggleMirror() {
+    isMirrored = !isMirrored;
+    teleprompter.style.transform = isMirrored ? 'scaleX(-1)' : 'scaleX(1)';
 }
 
 // IPC handlers for keyboard shortcuts will be registered by the main process
