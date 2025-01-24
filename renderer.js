@@ -3,6 +3,7 @@ let scrollSpeed = 1;
 let isReversed = false;
 let isMirrored = false;
 let scrollInterval;
+let fontSize = 48; // Initial font size
 
 const teleprompter = document.getElementById('teleprompter');
 
@@ -51,4 +52,17 @@ function toggleMirror() {
     teleprompter.style.transform = isMirrored ? 'scaleX(-1)' : 'scaleX(1)';
 }
 
+function adjustFontSize(delta) {
+    fontSize = Math.max(12, Math.min(96, fontSize + delta));
+    teleprompter.style.fontSize = `${fontSize}px`;
+}
+
+const { ipcRenderer } = require('electron');
+
 // IPC handlers for keyboard shortcuts will be registered by the main process
+// Register IPC handlers for shortcuts
+ipcRenderer.on('toggle-play', () => togglePlay());
+ipcRenderer.on('toggle-reverse', () => toggleReverse());
+ipcRenderer.on('adjust-speed', (_, delta) => adjustSpeed(delta));
+ipcRenderer.on('toggle-mirror', () => toggleMirror());
+ipcRenderer.on('adjust-font-size', (_, delta) => adjustFontSize(delta));

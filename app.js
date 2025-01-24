@@ -23,23 +23,31 @@ app.on('ready', () => {
 	});
 
 	globalShortcut.register('Command+Control+Shift+p', () => {
-		mainWindow.webContents.executeJavaScript('togglePlay()');
+		mainWindow.webContents.send('toggle-play');
 	});
 
 	globalShortcut.register('Command+Control+Shift+r', () => {
-		mainWindow.webContents.executeJavaScript('toggleReverse()');
+		mainWindow.webContents.send('toggle-reverse');
 	});
 
 	globalShortcut.register('Command+Control+Shift+Up', () => {
-		mainWindow.webContents.executeJavaScript('adjustSpeed(0.2)');
+		mainWindow.webContents.send('adjust-speed', 0.2);
 	});
 
 	globalShortcut.register('Command+Control+Shift+Down', () => {
-		mainWindow.webContents.executeJavaScript('adjustSpeed(-0.2)');
+		mainWindow.webContents.send('adjust-speed', -0.2);
 	});
 
 	globalShortcut.register('Command+Control+Shift+m', () => {
-		mainWindow.webContents.executeJavaScript('toggleMirror()');
+		mainWindow.webContents.send('toggle-mirror');
+	});
+
+	globalShortcut.register('Command+Control+Shift+=', () => {
+		mainWindow.webContents.send('adjust-font-size', 2);
+	});
+
+	globalShortcut.register('Command+Control+Shift+-', () => {
+		mainWindow.webContents.send('adjust-font-size', -2);
 	});
 });
 

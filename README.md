@@ -10,6 +10,7 @@ A lightweight, easy-to-use teleprompter application built with Electron. Perfect
 - Full-screen mode
 - Keyboard shortcuts for all controls
 - Text editing in real-time
+- Adjustable font size
 
 ## Installation
 
@@ -38,6 +39,8 @@ pnpm start
 - `⌘+⌃+⇧+R`: Toggle reverse scrolling
 - `⌘+⌃+⇧+↑`: Increase scroll speed
 - `⌘+⌃+⇧+↓`: Decrease scroll speed
+- `⌘+⌃+⇧++`: Increase font size
+- `⌘+⌃+⇧+-`: Decrease font size
 
 ## Building for macOS
 
@@ -55,10 +58,6 @@ The application is built with:
 - Electron
 - HTML/CSS/JavaScript
 - electron-builder for packaging
-
-## License
-
-ISC License
 
 ## Contributing
 
