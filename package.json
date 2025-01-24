@@ -1,0 +1,15 @@
+{
+  "name": "simpletp-electron",
+  "version": "1.0.0",
+  "description": "Simple teleprompter",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^34.0.1"
+  }
+}
