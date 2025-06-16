@@ -11,12 +11,11 @@ function renderHistory(historyItems) {
       itemName.textContent = item.name || 'Sem nome';
       listItem.appendChild(itemName);
 
-
       itemName.addEventListener('click', () => {
         teleprompter.innerHTML = item.text;
         currentlyLoadedItemId = item.id;
+        closeHistoryModal(); // Fecha o modal após carregar um item
       });
-
 
       const deleteButton = document.createElement('button');
       deleteButton.classList.add('delete-history-item');
@@ -46,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ipcRenderer.send('load-history');
 });
 
-saveToHistoryBtn.addEventListener('click', () => {
+saveToHistoryBtnModal.addEventListener('click', () => {
   const textContent = teleprompter.innerHTML;
   if (!textContent.trim()) {
     alert('Não há texto para salvar.');

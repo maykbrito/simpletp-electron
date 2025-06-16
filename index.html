@@ -10,20 +10,17 @@
         body {
             font-family: monospace;
             display: flex;
-            /* Alterado para flex para layout com sidebar */
             height: 100vh;
             margin: 0;
             overflow: hidden;
-        }
-
-        body {
             background: #000;
-            color: #fff;
+            /* Tom de cinza escuro para o fundo */
+            color: white;
+            /* Tom de cinza claro para o texto */
         }
 
         #main-content {
             flex-grow: 1;
-            /* Ocupa o espaço restante */
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -31,7 +28,6 @@
 
         #teleprompter {
             flex-grow: 1;
-            /* Ocupa o espaço vertical restante no main-content */
             padding: 2rem;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
@@ -40,69 +36,88 @@
             white-space: pre-wrap;
             overflow-y: auto;
             outline: none;
-            background-color: #111;
-            /* Cor de fundo para diferenciar */
-            color: #fff;
+            color: white;
         }
 
         #controls {
-            /* position: fixed; // Removido para integrar aos controles do histórico */
-            /* bottom: 20px; */
-            /* left: 50%; */
-            /* transform: translateX(-50%); */
-            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
             padding: 10px;
-            color: #fff;
             font-size: 10px;
             text-align: center;
-            /* opacity: 0.7; // Removido ou ajustado */
+            opacity: 0.7;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        /* Estilos para o Modal do Histórico */
+        #history-modal {
+            display: none;
+            /* Escondido por padrão */
+            position: fixed;
+            /* Fica sobreposto ao conteúdo */
+            z-index: 1000;
+            /* Garante que fique na frente */
+            left: 0;
+            top: 0;
             width: 100%;
-            /* Ocupa toda a largura do main-content */
-            box-sizing: border-box;
+            height: 100%;
+            overflow: auto;
+            /* Permite scroll se o conteúdo for maior */
+            background-color: rgba(17, 17, 17, 0.6);
+            /* Fundo semi-transparente mais escuro */
         }
 
-        #history-panel {
-            min-width: 250px;
-            /* width: 250px; */
-            /* Largura da barra lateral do histórico */
-            height: 100vh;
-            background: #222;
-            padding: 1rem;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
+        #history-modal-content {
+            background-color: rgb(0 0 0 / 0.2);
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #111;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #eee;
         }
 
-        #history-panel h3 {
+        #history-modal-content h3 {
             margin-top: 0;
-            color: #ccc;
             text-align: center;
+            border-bottom: 1px solid #111;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         #history-list {
             list-style: none;
             padding: 0;
             margin: 0;
-            flex-grow: 1;
+            max-height: 300px;
+            /* Altura máxima para a lista, com scroll interno */
             overflow-y: auto;
         }
 
         #history-list li {
             background: #333;
-            color: #eee;
-            padding: 8px 10px;
-            margin-bottom: 5px;
-            border-radius: 3px;
+            /* Fundo dos itens */
+            /* color: #eee; // Herdado */
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background-color 0.2s ease;
         }
 
         #history-list li:hover {
             background: #444;
+            /* Cor ao passar o mouse */
         }
 
         #history-list .history-item-name {
@@ -114,37 +129,72 @@
         }
 
         #history-list .delete-history-item {
-            background: #c00;
-            color: white;
+            background: #555;
+            /* Cinza mais escuro para o botão de deletar */
+            color: #ccc;
             border: none;
-            padding: 3px 6px;
+            padding: 5px 8px;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 10px;
+            font-size: 12px;
+            transition: background-color 0.2s ease;
         }
 
         #history-list .delete-history-item:hover {
-            background: #e00;
+            background: #666;
         }
 
-        #save-to-history-btn {
-            background: #007bff;
-            color: white;
+
+        #open-history-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #111;
+            color: #eee;
             border: none;
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            margin-bottom: 10px;
             font-size: 14px;
+            z-index: 1001;
         }
 
-        #save-to-history-btn:hover {
-            background: #0056b3;
+        #open-history-btn:hover {
+            background: #444;
+        }
+
+        .history-btns {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 15px;
+        }
+
+        .history-btns button {
+            background: rgba(20, 20, 20, 0.3);
+            color: #eee;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 14px;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .history-btns button:hover {
+            background: #555;
         }
     </style>
 </head>
 
 <body>
+    <button id="open-history-btn">⚡︎</button>
+
     <main id="main-content">
         <div id="teleprompter" contenteditable="true"></div>
         <div id="controls">
@@ -154,23 +204,23 @@
         </div>
     </main>
 
-    <div id="history-panel">
-        <h3>Histórico de Textos</h3>
-        <button id="save-to-history-btn">Salvar Texto Atual</button>
-        <ul id="history-list">
-            <!-- Itens do histórico serão adicionados aqui pelo renderer.js -->
-            <!-- Exemplo de item:
-            <li>
-                <span class="history-item-name">Nome do Texto Salvo</span>
-                <button class="delete-history-item" data-id="timestamp_ou_id_unico">X</button>
-            </li>
-            -->
-        </ul>
+    <!-- Modal do Histórico -->
+    <div id="history-modal">
+        <div id="history-modal-content">
+            <ul id="history-list">
+                <!-- Itens do histórico serão adicionados aqui -->
+            </ul>
+            <div class="history-btns">
+                <button id="new-entry-modal-btn" onclick="window.navigation.reload()">Novo</button>
+                <button id="save-to-history-btn">Salvar Texto Atual no Histórico</button>
+            </div>
+        </div>
     </div>
 
     <script src="consts.js"></script>
     <script src="renderer.js"></script>
     <script src="history-control.js"></script>
+    <script src="modal-control.js"></script>
 </body>
 
 </html>
