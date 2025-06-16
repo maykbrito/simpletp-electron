@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Teleprompter</title>
     <style>
-        html, body {
-            font-family: monospace;
-        }
+        html,
         body {
-            margin: 0;
-            padding: 0;
-            background: #000;
-            color: #fff;
+            font-family: monospace;
+            display: flex;
+            /* Alterado para flex para layout com sidebar */
             height: 100vh;
+            margin: 0;
             overflow: hidden;
         }
 
-        #teleprompter {
-            width: 100%;
+        body {
+            background: #000;
+            color: #fff;
+        }
+
+        #main-content {
+            flex-grow: 1;
+            /* Ocupa o espaço restante */
             height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #teleprompter {
+            flex-grow: 1;
+            /* Ocupa o espaço vertical restante no main-content */
             padding: 2rem;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
@@ -28,28 +40,137 @@
             white-space: pre-wrap;
             overflow-y: auto;
             outline: none;
+            background-color: #111;
+            /* Cor de fundo para diferenciar */
+            color: #fff;
         }
 
         #controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            /* position: fixed; // Removido para integrar aos controles do histórico */
+            /* bottom: 20px; */
+            /* left: 50%; */
+            /* transform: translateX(-50%); */
             background: rgba(0, 0, 0, 0.8);
             padding: 10px;
-            border-radius: 5px;
             color: #fff;
             font-size: 10px;
             text-align: center;
-            opacity: 0.7;
+            /* opacity: 0.7; // Removido ou ajustado */
+            width: 100%;
+            /* Ocupa toda a largura do main-content */
+            box-sizing: border-box;
+        }
+
+        #history-panel {
+            min-width: 250px;
+            /* width: 250px; */
+            /* Largura da barra lateral do histórico */
+            height: 100vh;
+            background: #222;
+            padding: 1rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        #history-panel h3 {
+            margin-top: 0;
+            color: #ccc;
+            text-align: center;
+        }
+
+        #history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        #history-list li {
+            background: #333;
+            color: #eee;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #history-list li:hover {
+            background: #444;
+        }
+
+        #history-list .history-item-name {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 10px;
+        }
+
+        #history-list .delete-history-item {
+            background: #c00;
+            color: white;
+            border: none;
+            padding: 3px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        #history-list .delete-history-item:hover {
+            background: #e00;
+        }
+
+        #save-to-history-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        #save-to-history-btn:hover {
+            background: #0056b3;
         }
     </style>
 </head>
+
 <body>
-    <div id="teleprompter" contenteditable="true"></div>
-    <div id="controls">
-        Shortcuts: ⌘+⌃+⇧+K (Toggle), ⌘+⌃+⇧+M (Mirror text), ⌘+⌃+⇧+P (Play/Pause), ⌘+⌃+⇧+R (Reverse), ⌘+⌃+⇧+↑ (Speed Up), ⌘+⌃+⇧+↓ (Speed Down), ⌘+⌃+⇧++ (Increase Font), ⌘+⌃+⇧+- (Decrease Font)
+    <main id="main-content">
+        <div id="teleprompter" contenteditable="true"></div>
+        <div id="controls">
+            Shortcuts: ⌘+⌃+⇧+K (Toggle), ⌘+⌃+⇧+M (Mirror text), ⌘+⌃+⇧+P (Play/Pause), ⌘+⌃+⇧+R (Reverse), ⌘+⌃+⇧+↑ (Speed
+            Up),
+            ⌘+⌃+⇧+↓ (Speed Down), ⌘+⌃+⇧++ (Increase Font), ⌘+⌃+⇧+- (Decrease Font)
+        </div>
+    </main>
+
+    <div id="history-panel">
+        <h3>Histórico de Textos</h3>
+        <button id="save-to-history-btn">Salvar Texto Atual</button>
+        <ul id="history-list">
+            <!-- Itens do histórico serão adicionados aqui pelo renderer.js -->
+            <!-- Exemplo de item:
+            <li>
+                <span class="history-item-name">Nome do Texto Salvo</span>
+                <button class="delete-history-item" data-id="timestamp_ou_id_unico">X</button>
+            </li>
+            -->
+        </ul>
     </div>
+
+    <script src="consts.js"></script>
     <script src="renderer.js"></script>
+    <script src="history-control.js"></script>
 </body>
+
 </html>

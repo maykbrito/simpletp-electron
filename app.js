@@ -1,4 +1,6 @@
 const { app, globalShortcut, BrowserWindow } = require('electron');
+require('./history-ipc-handlers')
+
 let mainWindow;
 
 function createWindow() {
@@ -62,4 +64,3 @@ app.on('activate', () => {
 		createWindow();
 	}
 });
-

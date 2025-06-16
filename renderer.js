@@ -5,8 +5,6 @@ let isMirrored = false;
 let scrollInterval;
 let fontSize = 48; // Initial font size
 
-const teleprompter = document.getElementById('teleprompter');
-
 function togglePlay() {
     isPlaying = !isPlaying;
     if (isPlaying) {
@@ -57,10 +55,6 @@ function adjustFontSize(delta) {
     teleprompter.style.fontSize = `${fontSize}px`;
 }
 
-const { ipcRenderer } = require('electron');
-
-// IPC handlers for keyboard shortcuts will be registered by the main process
-// Register IPC handlers for shortcuts
 ipcRenderer.on('toggle-play', () => togglePlay());
 ipcRenderer.on('toggle-reverse', () => toggleReverse());
 ipcRenderer.on('adjust-speed', (_, delta) => adjustSpeed(delta));
